@@ -1,14 +1,17 @@
 """Contains utility functions used across modules"""
 
 import os
+import sys
 from datetime import datetime
 from configparser import ConfigParser
 
 # Module constants
 ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
-DATA_PATH = os.path.abspath(os.path.join(ROOT_PATH, 'data'))
+sys.path.append(ROOT_PATH)  # make project path available in pythonpath
+
 TIMESTAMP = datetime.now().strftime('%m%d%Y')
 CONFIG_FILE = os.path.abspath(os.path.join(ROOT_PATH, 'config.ini'))
+DATA_PATH = os.path.abspath('/wdblue-1/saveallthepets/data')
 
 
 def config(section: str, filename=CONFIG_FILE,):

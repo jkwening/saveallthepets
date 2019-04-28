@@ -1,9 +1,14 @@
 """Module for collecting data from petfinder.com"""
 
 import os
+import sys
 import requests
 from typing import List
 from csv import DictWriter
+
+# Project root into python path
+ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+sys.path.append(ROOT_PATH)
 
 # Package modules
 from utils import config, DATA_PATH, TIMESTAMP
@@ -135,8 +140,9 @@ class PetFinderApi(object):
 
 
 if __name__ == '__main__':
+    loc = 'texas'
     api = PetFinderApi()
-    result = api.get_all_animals()
+    result = api.get_all_animals(location=loc)
     data = api.munge_animal_data(animals=result)
-    path = api.write_to_csv(data)
+    path = api.write_to_csv(data, location=loc)
     print('Flat file saved at:', path)
