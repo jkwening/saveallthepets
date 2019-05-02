@@ -77,6 +77,7 @@ class PetFinderApi(object):
     def get_all_animals(self, location='texas') -> List[dict]:
         animals = list()
 
+        print('Processing page 1...')
         result = self._fetch_animals(location=location)
         animals.extend(result['animals'])
         total_count = int(result['pagination']['total_count'])
@@ -84,6 +85,7 @@ class PetFinderApi(object):
 
         # Get remaining pages
         for i in range(2, total_pages + 1):
+            print(f'Processing page {i}...')
             result = self._fetch_animals(location=location,
                                          page=i)
             animals.extend(result['animals'])
@@ -104,6 +106,7 @@ class PetFinderApi(object):
         munged = list()
 
         # Iterate over each animal data
+        print('[mung_animal_data] Processing data...')
         for animal_dict in animals:
             data = dict()
             # Iterate over fields in animals dict
