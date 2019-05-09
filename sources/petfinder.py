@@ -8,7 +8,8 @@ from csv import DictWriter
 
 # Project root into python path
 ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-sys.path.append(ROOT_PATH)
+if ROOT_PATH not in sys.path:
+    sys.path.append(ROOT_PATH)
 
 # Package modules
 from utils import config, DATA_PATH, TIMESTAMP
